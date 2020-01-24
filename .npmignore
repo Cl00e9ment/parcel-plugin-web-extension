@@ -1,0 +1,8 @@
+/pnpm-lock.yaml
+/yarn.lock
+*.log
+.DS_Store
+.gitignore
+/test/
+/.prettierrc.json
+/.travis.yaml

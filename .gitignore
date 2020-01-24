@@ -1,1 +1,5 @@
-node_modules/
+/node_modules/
+/pnpm-lock.yaml
+/yarn.lock
+*.log
+.DS_Store
