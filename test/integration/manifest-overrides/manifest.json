@@ -13,5 +13,20 @@
             ],
             "run_at": "document_start"
         }
-    ]
+    ],
+    "content_security_policy": {
+        "$keepIf": "NODE_ENV is development",
+        "$replaceByValue": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+    },
+    "externally_connectable": {
+        "$keepIf": "NODE_ENV is production",
+        "ids": [
+            "aaa",
+            "bbb"
+        ],
+        "matches": [
+            "https://*.google.com/*",
+            "*://*.chromium.org/*"
+        ]
+    }
 }

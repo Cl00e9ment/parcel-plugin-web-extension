@@ -10,7 +10,7 @@ describe('Manifest overrides', () => {
         process.env.NODE_ENV = nodeEnv
     })
 
-    it('should merge manifest.json with manifest.development.json in NODE_ENV=development', async () => {
+    it('should generate manifest according to NODE_ENV=development', async () => {
         process.env.NODE_ENV = 'development'
         const bundler = await bundlerWithPlugin(
             __dirname + '/integration/manifest-overrides/manifest.json'
@@ -40,7 +40,7 @@ describe('Manifest overrides', () => {
         })
     })
 
-    it('should merge manifest.json with manifest.production.json when NODE_ENV=production', async () => {
+    it('should generate manifest according to NODE_ENV=production', async () => {
         process.env.NODE_ENV = 'production'
         const bundler = await bundlerWithPlugin(
             __dirname + '/integration/manifest-overrides/manifest.json'

@@ -39,13 +39,76 @@ Assets resolved by this plugin:
 - `chrome_url_overrides.newtab`
 - `chrome_url_overrides.history`
 
-### Environments
+### Dynamic Manifest
 
-This plugin will try to resolve and merge environment-specific manifest files in the format `manifest.${NODE_ENV}.json`. For example, in development, you can run:
-```sh
-NODE_ENV=development parcel src/manifest.json
+It is possible to generate a manifest that depends of:
+- the environment (development / production)
+- the targeted browser
+- the version
+- etc...
+
+#### Example
+
+Given this `manifest.json`:
+
+```json
+{
+	"manifest_version": 2,
+	"name": "Example",
+	"version": {
+		"$replaceByVariable": "npm_package_version"
+	},
+	"permissions": [
+		"storage",
+		{
+			"$keepIf": "NODE_ENV is development",
+			"$replaceByValue": "https://localhost/*"
+		},
+		{
+			"$keepIf": "NODE_ENV is production",
+			"$replaceByValue": "https://example.com/*"
+		}
+	],
+	"applications": {
+		"$keepIf": "VENDOR is firefox",
+		"gecko": {
+			"id": "example@example.com"
+		}
+	}
+}
 ```
-and the plugin will also look for `manifest.development.json` and merge those keys into the base manifest.
+
+If you execute this command,
+
+```bash
+VENDOR=firefox parcel src/manifest.json
+```
+
+...you will get this generated manifest:
+
+```json
+{
+	"manifest_version": 2,
+	"name": "Example",
+	"version": "1.0.0",
+	"permissions": [
+		"storage",
+		"https://localhost/*",
+	],
+	"applications": {
+		"gecko": {
+			"id": "example@example.com"
+		}
+	}
+}
+```
+
+What happend?  
+- The manifest `version` key was replaced by the `npm_package_version` environment variable. It corresponds to the version stored in your `package.json`. Here it's `1.0.0`.
+- The `localhost` permission was kept but the `example.com` one was droped because you are in a development environment. Use `parcel build` to switch to production environment.
+- The `applications` object was kept because we set the `VENDOR` environment variable to `firefox`. Please note that unless `npm_package_version` or `NODE_ENV` that are automatically set by NPM, the `VENDOR` environment variable is defined by you. You can use other variables that way if you want.
+
+For more information please see [Simple JSON Templater](https://www.npmjs.com/package/simple-json-templater)
 
 ## Licence
 

@@ -3,7 +3,7 @@ const upath = require('upath')
 const glob = require('fast-glob')
 const Asset = require('parcel-bundler/src/Asset')
 const JSONAsset = require('parcel-bundler/src/assets/JSONAsset')
-const fs = require('@parcel/fs')
+const { parse } = require('simple-json-templater')
 
 /**
  * A shared asset that handles:
@@ -80,40 +80,7 @@ class ManifestAsset extends Asset {
     }
 
     parse(code) {
-        return JSON.parse(code)
-    }
-
-    // Overrides default load method
-    async load() {
-        const name = this.name
-        const encoding = this.encoding
-        if (path.basename(name) !== 'manifest.json') {
-            return await fs.readFile(name, encoding)
-        }
-
-        const manifestDir = path.dirname(name)
-        const rawBaseManifest = await fs.readFile(name, encoding)
-        const baseManifest = JSON.parse(rawBaseManifest)
-
-        // Merge overrides
-        if (typeof process.env.NODE_ENV === 'string') {
-            const envManifestPath = path.resolve(
-                manifestDir,
-                `manifest.${process.env.NODE_ENV}.json`
-            )
-            try {
-                const rawEnvManifest = await fs.readFile(
-                    envManifestPath,
-                    encoding
-                )
-                const envManifest = JSON.parse(rawEnvManifest)
-                Object.assign(baseManifest, envManifest)
-            } catch (err) {
-                // No valid override found. Don't error.
-            }
-        }
-
-        return JSON.stringify(baseManifest)
+        return parse(JSON.parse(code), process.env)
     }
 
     processSingleDependency(path, opts) {
