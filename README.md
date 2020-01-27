@@ -53,28 +53,28 @@ Given this `manifest.json`:
 
 ```json
 {
-	"manifest_version": 2,
-	"name": "Example",
-	"version": {
-		"$replaceByVariable": "npm_package_version"
-	},
-	"permissions": [
-		"storage",
-		{
-			"$keepIf": "NODE_ENV is development",
-			"$replaceByValue": "https://localhost/*"
-		},
-		{
-			"$keepIf": "NODE_ENV is production",
-			"$replaceByValue": "https://example.com/*"
-		}
-	],
-	"applications": {
-		"$keepIf": "VENDOR is firefox",
-		"gecko": {
-			"id": "example@example.com"
-		}
-	}
+    "manifest_version": 2,
+    "name": "Example",
+    "version": {
+        "$replaceByVariable": "npm_package_version"
+    },
+    "permissions": [
+        "storage",
+        {
+            "$keepIf": "NODE_ENV is development",
+            "$replaceByValue": "https://localhost/*"
+        },
+        {
+            "$keepIf": "NODE_ENV is production",
+            "$replaceByValue": "https://example.com/*"
+        }
+    ],
+    "applications": {
+        "$keepIf": "VENDOR is firefox",
+        "gecko": {
+            "id": "example@example.com"
+        }
+    }
 }
 ```
 
@@ -88,18 +88,18 @@ VENDOR=firefox parcel src/manifest.json
 
 ```json
 {
-	"manifest_version": 2,
-	"name": "Example",
-	"version": "1.0.0",
-	"permissions": [
-		"storage",
-		"https://localhost/*",
-	],
-	"applications": {
-		"gecko": {
-			"id": "example@example.com"
-		}
-	}
+    "manifest_version": 2,
+    "name": "Example",
+    "version": "1.0.0",
+    "permissions": [
+        "storage",
+        "https://localhost/*",
+    ],
+    "applications": {
+        "gecko": {
+            "id": "example@example.com"
+        }
+    }
 }
 ```
 
