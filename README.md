@@ -98,7 +98,7 @@ VENDOR=firefox parcel src/manifest.json
     "version": "1.0.0",
     "permissions": [
         "storage",
-        "https://localhost/*",
+		"https://localhost/*"
     ],
     "applications": {
         "gecko": {
