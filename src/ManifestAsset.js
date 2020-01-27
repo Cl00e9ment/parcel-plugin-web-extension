@@ -22,7 +22,6 @@ class ManifestAsset extends Asset {
         }
 
         this.type = this.kind === 'pwa-manifest' ? 'webmanifest' : 'json'
-        this.isAstDirty = false
         this.dependencyProcessors = {
             background: this.processBackground,
             content_scripts: this.processContentScripts,
@@ -239,7 +238,6 @@ class ManifestAsset extends Asset {
             const processor = this.dependencyProcessors[nodeName]
             if (processor) {
                 processor.call(this)
-                this.isAstDirty = true
             }
         }
     }
@@ -283,11 +281,7 @@ class ManifestAsset extends Asset {
     }
 
     generate() {
-        if (this.isAstDirty) {
-            return JSON.stringify(this.ast)
-        }
-
-        return this.contents
+        return JSON.stringify(this.ast)
     }
 }
 
