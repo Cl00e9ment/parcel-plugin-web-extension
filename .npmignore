@@ -5,4 +5,4 @@
 .gitignore
 /test/
 /.prettierrc.json
-/.travis.yaml
+/.travis.yml
