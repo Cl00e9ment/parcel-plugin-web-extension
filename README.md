@@ -4,10 +4,10 @@
 
 This [parcel](https://github.com/parcel-bundler/parcel) plugin enables you to use a WebExtension `manifest.json` as an entry point. For more information about `manifest.json`, please refer to the [MDN docs](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/manifest.json).
 
-> Please note that **this package is a fork** of [parcel-plugin-web-extension](https://github.com/kevincharm/parcel-plugin-web-extension)
+> Please note that **this package is a fork** from [parcel-plugin-web-extension](https://github.com/kevincharm/parcel-plugin-web-extension)
 >
-> Main difference:
-> The concept of manifest overrides was abandoned in favor of the concept of dynamic manifest (see bellow).
+> Main difference:  
+> The concept of manifest overrides was abandoned in favor of the concept of dynamic manifest (see below).
 
 ## Installation
 
