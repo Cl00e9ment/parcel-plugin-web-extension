@@ -1,18 +1,23 @@
-[![Build Status](https://travis-ci.org/kevincharm/parcel-plugin-web-extension.svg?branch=master)](https://travis-ci.org/kevincharm/parcel-plugin-web-extension)
+[![Build Status](https://api.travis-ci.com/Cl00e9ment/parcel-plugin-web-extension.svg?branch=master)](https://travis-ci.com/Cl00e9ment/parcel-plugin-web-extension)
 
-# parcel-plugin-web-extension
+# Parcel Plugin Web Extension 2
 
 This [parcel](https://github.com/parcel-bundler/parcel) plugin enables you to use a WebExtension `manifest.json` as an entry point. For more information about `manifest.json`, please refer to the [MDN docs](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/manifest.json).
+
+> Please note that **this package is a fork** of [parcel-plugin-web-extension](https://github.com/kevincharm/parcel-plugin-web-extension)
+>
+> Main difference:
+> The concept of manifest overrides was abandoned in favor of the concept of dynamic manifest (see bellow).
 
 ## Installation
 
 Install via npm:
 ```sh
-npm install --save-dev parcel-plugin-web-extension
+npm install --save-dev parcel-plugin-web-extension-2
 ```
 or via yarn:
 ```sh
-yarn add -D parcel-plugin-web-extension
+yarn add -D parcel-plugin-web-extension-2
 ```
 
 ## Usage
